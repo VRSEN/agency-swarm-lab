@@ -1,0 +1,2 @@
+selenium-stealth
+webdriver-manager
