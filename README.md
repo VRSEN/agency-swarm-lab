@@ -1,4 +1,4 @@
-## Agency Swarm Lab
+# Agency Swarm Lab
 Welcome to the Agency Swarm Lab repository! This is a collaborative space where we showcase the incredible capabilities of custom AI agent teams developed using the [Agency Swarm](https://github.com/VRSEN/agency-swarm) framework.
 
 ## Getting Started
