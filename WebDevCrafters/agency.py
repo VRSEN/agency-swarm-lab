@@ -9,7 +9,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-set_openai_key(os.environ["OPENAI_API_KEY"])
+set_openai_key(os.environ["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"])
 
 ceo = CEO()
 designer = Designer()
