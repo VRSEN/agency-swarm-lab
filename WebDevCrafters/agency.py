@@ -1,4 +1,4 @@
-from agency_swarm import Agency, set_openai_key
+from agency-swarm import Agency, set_openai_key
 from CEO import CEO
 from Copywriter import Copywriter
 from WebDeveloper import WebDeveloper
@@ -6,7 +6,7 @@ from Designer import Designer
 import os
 
 # load env from .env
-from dotenv import load_dotenv
+from api.env import load_dotenv
 load_dotenv()
 
 set_openai_key(os.environ["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"])
