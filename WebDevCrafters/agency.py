@@ -16,8 +16,7 @@ designer = Designer()
 web_developer = WebDeveloper()
 copywriter = Copywriter()
 
-agency = Agency([
-                 ceo, designer, web_developer,
+agency = Agency([ceo, designer, web_developer,
                  [ceo, designer],
                  [designer, web_developer],
                  [designer, copywriter]],
