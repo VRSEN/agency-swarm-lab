@@ -1,0 +1,46 @@
+# Define a base image argument
+FROM selenium/standalone-chrome:latest
+
+# Install Node.js and npm
+RUN sudo apt-get update && \
+    sudo apt-get install -y curl software-properties-common && \
+    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash - && \
+    sudo apt-get install -y nodejs && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+# Install Python and other dependencies
+RUN sudo apt-get update && \
+    sudo apt-get install -y python3 python3-pip python3-venv && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+# Ensuring the user home directory is used for the virtual environment
+# This assumes 'seluser' is the user. Adjust if your user is different.
+WORKDIR /home/seluser
+
+# Use Python's built-in venv for creating a virtual environment
+RUN python3 -m venv venv
+
+# Update PATH environment variable to use the virtual environment as the primary Python
+# Notice we're using the absolute path here
+ENV PATH="/home/seluser/venv/bin:$PATH"
+
+# Upgrade pip within the virtual environment
+RUN pip install --upgrade pip
+
+# Switching to /app for application files
+WORKDIR /app
+
+# Assuming you're copying the requirements.txt file to the container
+COPY requirements.txt .
+
+# Install Python packages within the virtual environment
+RUN pip install -r requirements.txt && pip install selenium webdriver-manager selenium_stealth
+
+# Define environment variable for OpenAI API Key
+ENV OPENAI_API_KEY=YourOpenAIKeyHere
+
+# Expose ports
+EXPOSE 7860 4444 7900
+
+# Using CMD to launch bash might be fine, but we don't need to source the activate script explicitly with Docker
+CMD ["/bin/bash"]

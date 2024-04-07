@@ -64,8 +64,12 @@ Running agencies in docker is safer as it does not affect your local file system
 2. **Build the Docker Image**.
 
     ```bash
-   docker build -t vrsen/agency-swarm .
+   docker build -t vrsen/agency-swarm -f path/to/your/Dockerfile .
     ```
+   
+    The command breakdown is as follows:
+      - `-t vrsen/agency-swarm` is the name you give to the Docker image that you are generating.
+      - `-f path/to/your/Dockerfile` specifies the path to the Dockerfile that you will use to build the image. The Dockerfile is located in the root of the repository.
    
 3. **Run the Docker Image**: Use this command from the root of the repository. Make sure to replace `<YourOpenAIKey>` with your actual OpenAI API key.
 
