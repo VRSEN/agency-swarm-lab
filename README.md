@@ -17,7 +17,7 @@ To get started with creating your own custom AI agency using the Agency Swarm La
 
     ```bash
     cd agency-swarm-lab
-    pip install -r requirements.txt
+    pip install -U -r requirements.txt
     ```
 
 3. **Choose an Agency**: Decide which agency you would like to run or explore. Each agency is contained in its own folder within the repository.

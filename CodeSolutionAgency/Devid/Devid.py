@@ -16,6 +16,8 @@ class Devid(Agent):
             tools=[Retrieval],
             tools_folder="./tools",
             validation_attempts=1,
+            max_prompt_tokens=25000,
+            temperature=0.0,
         )
 
     @override
@@ -36,6 +38,6 @@ class Devid(Agent):
                                 "statements for another attempt. Should the agent outline potential "
                                 "solutions or further actions, direct the agent to execute those plans. "
                                 "Message does not have to contain code snippets. Just confirmation.",
-                      openai_client=self.client)(message)
+                      client=self.client)(message)
 
         return message
