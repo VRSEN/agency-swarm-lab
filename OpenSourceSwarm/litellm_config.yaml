@@ -1,0 +1,25 @@
+model_list:
+  - model_name: anthropic/claude-3-opus-20240229
+    litellm_params:
+      model: anthropic/claude-3-opus-20240229
+      api_key:
+
+  - model_name: gemini/gemini-1.5-pro-latest
+    litellm_params:
+      model: gemini/gemini-1.5-pro-latest
+      api_key:
+
+  - model_name: together_ai/mistralai/Mistral-7B-Instruct-v0.1
+    litellm_params:
+      model: together_ai/mistralai/Mistral-7B-Instruct-v0.1
+      api_key:
+
+  - model_name: groq/mixtral-8x7b-32768
+    litellm_params:
+      model: groq/mixtral-8x7b-32768
+      api_key:
+
+  - model_name: ollama/llama3
+    litellm_params:
+      model: ollama/llama3
+      api_key: anything

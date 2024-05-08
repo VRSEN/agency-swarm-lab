@@ -1,0 +1,3 @@
+agency-swarm==0.1.7
+gradio
+litellm[proxy]
