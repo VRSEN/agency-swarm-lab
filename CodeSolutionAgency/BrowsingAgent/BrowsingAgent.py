@@ -13,7 +13,8 @@ class BrowsingAgent(Agent):
             files_folder="./files",
             schemas_folder="./schemas",
             tools=[Retrieval],
-            tools_folder="./tools"
+            tools_folder="./tools",
+            temperature=0.0,
         )
 
         if selenium_config is not None:
