@@ -102,8 +102,6 @@ def demo_gradio(agency, height=450, dark_mode=True):
             gen = agency.get_completion(message=original_message, message_files=message_file_ids,
                                         recipient_agent=recipient_agent, yield_messages=True)
 
-            print(gen)
-
             message_file_ids = []
             message_file_names = []
             try:
@@ -111,8 +109,6 @@ def demo_gradio(agency, height=450, dark_mode=True):
                 for bot_message in gen:
                     if bot_message.sender_name.lower() == "user":
                         continue
-
-                    print("Bot message: ", bot_message.content)
 
                     # sometimes thread stops before bot message is received
                     if not bot_message.content:
@@ -132,7 +128,6 @@ def demo_gradio(agency, height=450, dark_mode=True):
                     yield "", history
             except StopIteration:
                 # Handle the end of the conversation if necessary
-                print("Conversation ended.")
                 pass
 
         button.click(
