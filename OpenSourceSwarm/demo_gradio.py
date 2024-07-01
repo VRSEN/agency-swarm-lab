@@ -100,7 +100,7 @@ def demo_gradio(agency, height=450, dark_mode=True):
             print("Message files: ", message_file_ids)
             # Replace this with your actual chatbot logic
             gen = agency.get_completion(message=original_message, message_files=message_file_ids,
-                                        recipient_agent=recipient_agent)
+                                        recipient_agent=recipient_agent, yield_messages=True)
 
             print(gen)
 
