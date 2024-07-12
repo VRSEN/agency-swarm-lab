@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "astraopensourceswarm"
+version = "0.1.0"
+description = ""
+authors = ["phact <estevezsebastian@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+agency-swarm = "^0.2.5"
+gradio = "^4.37.2"
+astra-assistants = "^2.0.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
