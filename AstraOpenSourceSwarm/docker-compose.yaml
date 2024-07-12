@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    networks:
+      - my_network
+    volumes:
+      - ~/.ollama:/root/.ollama  #map to local volume to keep models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [ gpu ]
+    environment:
+      NVIDIA_VISIBLE_DEVICES: "all"  # or specify the GPU IDs
+    runtime: nvidia  # Specify the runtime for NVIDIA GPUs  -
+
+  assistants:
+    image: datastax/astra-assistants
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    depends_on:
+      - ollama
+
+
+networks:
+  my_network:
+    driver: bridge
