@@ -8,7 +8,9 @@ class LlamaAgent(Agent):
             description="Llama agent that uses the latest llama3 model.",
             instructions="./instructions.md",
             tools=[],
-            model="ollama/llama3"
+            tools_folder="./tools",
+            files_folder="./files",
+            model="ollama/llama3.1:8b"
         )
         
     def response_validator(self, message):

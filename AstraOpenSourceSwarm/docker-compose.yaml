@@ -1,22 +1,23 @@
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama
-    ports:
-      - "11434:11434"
-    networks:
-      - my_network
-    volumes:
-      - ~/.ollama:/root/.ollama  #map to local volume to keep models
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - capabilities: [ gpu ]
-    environment:
-      NVIDIA_VISIBLE_DEVICES: "all"  # or specify the GPU IDs
-    runtime: nvidia  # Specify the runtime for NVIDIA GPUs  -
+  # uncomment this if you don't have ollama installed locally
+  # ollama:
+  #   image: ollama/ollama
+  #   ports:
+  #     - "11434:11434"
+  #   networks:
+  #     - my_network
+  #   volumes:
+  #     - ~/.ollama:/root/.ollama  #map to local volume to keep models
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - capabilities: [ gpu ]
+  #   environment:
+  #     NVIDIA_VISIBLE_DEVICES: "all"  # or specify the GPU IDs
+  #   runtime: nvidia  # Specify the runtime for NVIDIA GPUs  -
 
   assistants:
     image: datastax/astra-assistants
@@ -24,8 +25,13 @@ services:
       - "8000:8000"
     networks:
       - my_network
-    depends_on:
-      - ollama
+    environment:
+      - OLLAMA_API_BASE_URL=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # uncomment this if you don't have ollama installed locally
+    # depends_on:
+    #   - ollama
 
 
 networks:
