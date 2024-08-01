@@ -33,6 +33,7 @@ To get started with using my framework with open source models, follow these det
    You can now customize your agents by adding your own models and configurations to the `litellm_config.yaml` file. For example, to use olama models, you would add the following configuration:
     ```python
     from agency_swarm.agents import Agent
+    from agency_swarm.agents import LlamaAgent
     
     class LlamaAgent(Agent):
         def __init__(self):
@@ -72,6 +73,9 @@ To get started with using my framework with open source models, follow these det
 8. **Replace OpenAI Client**:
     Replace the OpenAI client with the OpenAssistant client in the `agency.py` file:
     ```python
+    from openai import OpenAI
+    from agency_swarm import set_openai_client
+
     client = OpenAI(
         base_url="http://127.0.0.1:8086/api/v1", # Base url of the open-assistant-api
         api_key="xxx", # Not needed for open-assistant-api
