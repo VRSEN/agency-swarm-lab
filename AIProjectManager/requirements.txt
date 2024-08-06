@@ -1,0 +1,6 @@
+agency-swarm
+requests
+fastapi<1
+uvicorn<1
+slack_bolt
+firebase_functions~=0.1.0  
