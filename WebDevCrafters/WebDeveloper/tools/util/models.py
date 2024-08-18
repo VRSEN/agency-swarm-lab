@@ -5,7 +5,7 @@ import json
 class ReactComponent(BaseModel):
     type: str = Field(..., description="The type of the component. For simple text, use 'text'. For empty components (e.g. <></>), use 'empty'. Examples: Button, Header, Footer, div, span, text, empty")
     props: Dict[str, Any] = Field(default_factory=dict, description="The props of the component.")
-    children: List[Union[str, 'ReactComponent']] = Field(..., description="The children of the component. String is only allowed for 'text' type.")
+    children: Union[str,  List['ReactComponent']] = Field(..., description="The children of the component. String is only allowed for 'text' type.")
 
     def custom_dump(self):
         # Prepare the basic component structure
