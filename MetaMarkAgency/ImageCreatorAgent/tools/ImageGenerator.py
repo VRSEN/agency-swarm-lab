@@ -48,7 +48,7 @@ class ImageGenerator(BaseTool):
             f.write(base64.b64decode(image_data))
             f.close()
 
-        self.shared_state.set("image_path", os.path.abspath("image.png"))
+        self._shared_state.set("image_path", os.path.abspath("image.png"))
 
 if __name__ == "__main__":
     tool = ImageGenerator(ad_copy="A beautiful sunset", theme="Nature",

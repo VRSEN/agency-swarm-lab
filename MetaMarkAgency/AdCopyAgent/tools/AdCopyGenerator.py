@@ -36,9 +36,9 @@ class AdCopyGenerator(BaseTool):
         )
         text = response.choices[0].text.strip()
         headline = text.split("Ad Copy:")[0].split("Headline:")[1].strip()
-        self.shared_state.set("ad_headline", headline)
+        self._shared_state.set("ad_headline", headline)
         ad_copy = response.choices[0].text.strip().split("Ad Copy:")[1].strip()
-        self.shared_state.set("ad_copy", ad_copy)
+        self._shared_state.set("ad_copy", ad_copy)
         return text
 
 if __name__ == "__main__":

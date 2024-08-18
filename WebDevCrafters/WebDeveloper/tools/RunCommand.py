@@ -26,7 +26,7 @@ class RunCommand(BaseTool):
                     return 'Please provide a name for the app when using the `create-next-app` command.'
 
                 app_name = options_list[0]  # Extract app name from the options
-                if self.shared_state.get('app_directory'):
+                if self._shared_state.get('app_directory'):
                     return 'You have already created a Next.js app.'
 
                 cmd = [
@@ -36,20 +36,24 @@ class RunCommand(BaseTool):
 
                 process = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
+                # install react-serialize
+                cmd = ['npm', 'install', 'react-serialize']
+                process = subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
                 if process.returncode == 0:
                     app_directory = os.path.join(os.getcwd(), app_name)
-                    self.shared_state.set('app_directory', app_directory)
+                    self._shared_state.set('app_directory', app_directory)
                     return f'Command executed successfully. App directory: {app_directory}\nOutput:\n{process.stdout} The application uses typescript.'
                 else:
                     return f'Error executing command: {process.stderr}'
 
             # Ensures an app has been created before proceeding with 'build' or 'install'
-            if not self.shared_state.get('app_directory'):
+            if not self._shared_state.get('app_directory'):
                 return 'Please create a Next.js app first using the `create-next-app` command.'
 
             # Change to the app directory before running 'build' or 'install'
             current_directory = os.getcwd()
-            os.chdir(self.shared_state.get('app_directory'))
+            os.chdir(self._shared_state.get('app_directory'))
 
             if self.command == 'build':
                 cmd = ['npm', 'run', 'build'] + options_list

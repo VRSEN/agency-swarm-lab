@@ -9,7 +9,7 @@ class CheckCurrentDir(BaseTool):
     def run(self):
         import os
 
-        if not self.shared_state.get('app_directory'):
+        if not self._shared_state.get('app_directory'):
             return "You must create an app first to use this tool."
 
         return os.getcwd()
