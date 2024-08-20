@@ -14,6 +14,12 @@ To install the required dependencies for this agency, run the following command:
 pip install -r requirements.txt
 ```
 
+Then install playwright browsers with the following command:
+
+```bash
+playwright install
+```
+
 Make sure you have `agency_swarm` and `npm` installed as well. For details on how to install `npm`, refer to the official [npm documentation](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 ## Agents

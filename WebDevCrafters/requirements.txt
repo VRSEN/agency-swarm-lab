@@ -1,2 +1,4 @@
+selenium
 selenium-stealth
 webdriver-manager
+playwright
