@@ -127,7 +127,7 @@ class ComponentInjectorTool(BaseTool):
             js_file.write(js_content)
 
         # Transpile the JSX file using Babel
-        subprocess.run(['npx', 'babel', 'parse_jsx.jsx', '--presets', '@babel/preset-react', '-o', 'transpiled.js'], check=True)
+        subprocess.run(['npx', 'babel', 'parse_jsx.jsx', '--presets', '@babel/preset-react', '-o', 'transpiled.js'], check=True, shell=True)
 
         # Run the transpiled JavaScript file and capture the output
         result = subprocess.run(['node', 'transpiled.js'], capture_output=True, text=True)
@@ -265,12 +265,20 @@ class ComponentInjectorTool(BaseTool):
 
     
 if __name__ == "__main__":
+    # tool = ComponentInjectorTool(
+    #     file_path="./app.js",
+    #     additional_imports=["import PropTypes from 'prop-types';"],
+    #     target_component="button",
+    #     index=0,
+    #     insert_index=1,
+    #     component=ReactComponent(type="button", props={}, children=[ReactComponent(type="span", props={}, children=[ReactComponent(type="text", children="Hello, world!")])])
+    # )
     tool = ComponentInjectorTool(
-        file_path="./app.js",
-        additional_imports=["import PropTypes from 'prop-types';"],
-        target_component="button",
+        file_path="index.tsx",
+        additional_imports=["import WelcomeSection from '../src/components/WelcomeSection';"],
+        target_component="main",
         index=0,
-        insert_index=1,
-        component=ReactComponent(type="button", props={}, children=[ReactComponent(type="span", props={}, children=[ReactComponent(type="text", children="Hello, world!")])])
+        insert_index=0,
+        component={"type":"WelcomeSection","props":{},"children":[]}
     )
     print(tool.run())

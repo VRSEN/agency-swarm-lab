@@ -1,4 +1,4 @@
-from agency_swarm import Agency, set_openai_key
+from agency_swarm import Agency, set_openai_key, set_openai_client
 from CEO import CEO
 from Copywriter import Copywriter
 from WebDeveloper import WebDeveloper
@@ -10,6 +10,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 set_openai_key(os.environ["OPENAI_API_KEY"])
+
+import openai
+import httpx
+client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"],
+                    #    timeout=httpx.Timeout(1800000.0, read=18000000, connect=15.0),
+                       max_retries=10,
+                       default_headers={"OpenAI-Beta": "assistants=v2"})
+set_openai_client(client)
 
 def load_threads(chat_id):
     if os.path.exists(f"{chat_id}_threads.json"):
@@ -33,7 +41,9 @@ chat_id = '1234'
 
 agency = Agency([ceo, designer, web_developer,
                  [ceo, designer],
+                 [designer, ceo],
                  [designer, web_developer],
+                 [web_developer, designer],
                  [designer, copywriter]],
                 shared_instructions='./agency_manifesto.md',
                 threads_callbacks={
@@ -42,7 +52,8 @@ agency = Agency([ceo, designer, web_developer,
                 })
 
 if __name__ == '__main__':
-    agency.shared_state.set('app_directory', '/Users/vrsen/Projects/agency-swarm-lab/WebDevCrafters/vrsen-ai-landing-page')
+    web_developer._shared_state.set("app_directory", "D:\\work\\VRSEN\\code\\agency-swarm-lab\\WebDevCrafters\\webdevcrafters-app")
     agency.demo_gradio(height=400)
+    # I need a new landing for my ai development agency vrsen ai
     # agency.run_demo()
     # agency.get_completion('Please create a basic website for me', recipient_agent=web_developer, verbose=True)

@@ -2,6 +2,7 @@ from agency_swarm.agents import Agent
 
 
 class WebDeveloper(Agent):
+
     def __init__(self):
         super().__init__(
             name="WebDeveloper",

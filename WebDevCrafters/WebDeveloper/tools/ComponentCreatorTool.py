@@ -29,7 +29,8 @@ class ComponentCreatorTool(BaseTool):
     file_path: str = Field(..., description="The path to the file to save the React component code. Example: /Users/johndoe/projects/my-app/components/Button.tsx")
     imports: List[str] = Field(..., description="List of imports for the React component. Examples: 'import React from 'react';', 'import PropTypes from 'prop-types';'")
     logic: str = Field(..., description="The logic of the component. For example, submitting a form or handling a click event. Leave empty string if no logic is needed. Example: const handleClick = () => console.log('Hello, world!');\n\nconst handleSubmit = (event) => {\n  event.preventDefault();\n  console.log('Form submitted');\n}")
-    return_component: Union[ReactComponent, str] = Field(..., description="The return value of the component. For example, a button or a form.")
+    return_component: Union[ReactComponent, str] = Field(..., description="""The return value of the component. For example, a button or a form.
+                                                         Example input: {"type":"div","props":{},"children":[{"type":"text","props":{},"children":"This is a test component."},{"type":"text","props":{},"children":"This component is created to test the ComponentCreatorTool functionality."}]}""")
 
     class ToolConfig:
         strict = True
@@ -68,14 +69,14 @@ export default {self.name};
         return f"React component code generated and saved to {self.file_path}. Full code:\n\n```{final_code}```"
     
 if __name__ == "__main__":
-    # tool = ComponentCreatorTool(
-    #     name="App",
-    #     file_path="./app2.js",
-    #     imports=["import React from 'react';"],
-    #     logic="",
-    #     return_component=ReactComponent(type="div", props={}, children=[ReactComponent(type="button", props={}, children=[ReactComponent(type="text", children="Hello, world!")])])
-    # )
-    # print(tool.run())
+    tool = ComponentCreatorTool(
+        name="Header",
+        file_path="src/components/Header.tsx",
+        imports=["import React from 'react';", "import { AppBar, Toolbar, Typography, Button } from '@mui/material';"],
+        logic="",
+        return_component="""{"type":"div","props":{},"children":[{"type":"text","props":{},"children":"This is a test component."},{"type":"text","props":{},"children":"This component is created to test the ComponentCreatorTool functionality."}]}"""
+    )
+    print(tool.run())
 
     import json
     print(json.dumps(ComponentCreatorTool.openai_schema, indent=2))
