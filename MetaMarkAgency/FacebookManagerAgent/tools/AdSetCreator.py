@@ -27,12 +27,12 @@ class AdSetCreator(BaseTool):
 
     def run(self):
         try:
-            if not self.shared_state.get('campaign_id'):
+            if not self._shared_state.get('campaign_id'):
                 raise ValueError('Campaign ID not found. Please use AdCampaignStarter tool first.')
 
             ad_account = AdAccount(ad_account_id)
             params = {
-                'campaign_id': self.shared_state.get('campaign_id'),
+                'campaign_id': self._shared_state.get('campaign_id'),
                 'name': self.name,
                 'targeting': {"geo_locations": {"countries": ["US"]}},
                 'start_time': datetime.today().isoformat(),
@@ -43,7 +43,7 @@ class AdSetCreator(BaseTool):
                 "bid_amount": "100",
             }
             ad_set = ad_account.create_ad_set(params=params)
-            self.shared_state.set('ad_set_id', ad_set["id"])
+            self._shared_state.set('ad_set_id', ad_set["id"])
             return f'Ad set {self.name} has been successfully created with ID {ad_set["id"]}.'
         except facebook_business.exceptions.FacebookRequestError as e:
             return f'Error creating ad set: {e}'

@@ -31,20 +31,20 @@ class AdCreator(BaseTool):
 
     def run(self):
         image = AdImage(parent_id=ad_account_id)
-        image[AdImage.Field.filename] = self.shared_state.get('image_path')
+        image[AdImage.Field.filename] = self._shared_state.get('image_path')
         image.remote_create()
 
         creative = AdCreative(parent_id=ad_account_id)
-        creative[AdCreative.Field.title] = self.shared_state.get('ad_headline')
-        creative[AdCreative.Field.body] = self.shared_state.get('ad_copy')
+        creative[AdCreative.Field.title] = self._shared_state.get('ad_headline')
+        creative[AdCreative.Field.body] = self._shared_state.get('ad_copy')
         creative[AdCreative.Field.object_story_spec] = {
             'page_id': os.getenv('FACEBOOK_PAGE_ID'),
             'link_data': {
                 'image_hash': image.get_hash(),
                 "call_to_action": {'type': 'LEARN_MORE'},
                 'link': self.link,
-                "name": self.shared_state.get('ad_headline'),
-                "message": self.shared_state.get('ad_copy'),
+                "name": self._shared_state.get('ad_headline'),
+                "message": self._shared_state.get('ad_copy'),
             }
         }
         creative[AdCreative.Field.degrees_of_freedom_spec] = {
@@ -58,7 +58,7 @@ class AdCreator(BaseTool):
 
         ad = Ad(parent_id=ad_account_id)
         ad[Ad.Field.name] = self.name
-        ad[Ad.Field.adset_id] = self.shared_state.get('ad_set_id')
+        ad[Ad.Field.adset_id] = self._shared_state.get('ad_set_id')
         ad[Ad.Field.creative] = creative
         ad.remote_create(params={
             'status': Ad.Status.paused,
@@ -68,16 +68,16 @@ class AdCreator(BaseTool):
 
     @model_validator(mode="after")
     def validate(self):
-        if not self.shared_state.get('image_path'):
+        if not self._shared_state.get('image_path'):
             raise ValueError('Please tell Image Creator agent to generate an image first.')
 
-        if not self.shared_state.get('ad_set_id'):
+        if not self._shared_state.get('ad_set_id'):
             raise ValueError('Ad set ID not found. Please use AdSetCreator tool first.')
 
-        if not self.shared_state.get('campaign_id'):
+        if not self._shared_state.get('campaign_id'):
             raise ValueError('Campaign ID not found. Please use AdCampaignStarter tool first.')
 
-        if not self.shared_state.get('ad_copy'):
+        if not self._shared_state.get('ad_copy'):
             raise ValueError('Please use AdCopyGenerator tool to generate ad copy first.')
 
 if __name__ == "__main__":

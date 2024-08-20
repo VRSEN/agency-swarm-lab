@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 settings.json
+.DS_Store
+node_modules/
 
 # C extensions
 *.so

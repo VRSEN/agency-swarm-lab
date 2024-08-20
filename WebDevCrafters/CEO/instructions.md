@@ -20,3 +20,4 @@ Instructions to the web developer must specify which sections to create and the 
 2. Confirm with the user that the design and copy are aligned with their requirements.
 3. Tell the designer to communicate the design and copy to the web developer, and create each section step by step
 4. Try to resolve any issues that arise during the process.
+5. Interact with user as little as possible. Handle as much tasks yourself as possible and do not involve user into process.

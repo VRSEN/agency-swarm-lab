@@ -16,12 +16,6 @@ class ListDir(BaseTool):
     def run(self):
         import os
 
-        if not self.shared_state.get('app_directory'):
-            return "You must create an app first to use this tool."
-
-        if self.shared_state.get('app_directory') not in os.getcwd():
-            return "You must be in the root directory of the app to use this tool."
-
         tree = []
         def list_directory_tree(path, indent=''):
             """Recursively list the contents of a directory in a tree-like format."""
