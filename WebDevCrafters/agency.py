@@ -1,9 +1,12 @@
+import os
+import json
+
 from agency_swarm import Agency, set_openai_key
+
 from CEO import CEO
 from Copywriter import Copywriter
 from WebDeveloper import WebDeveloper
 from Designer import Designer
-import os, json
 
 # load env from .env
 from dotenv import load_dotenv
@@ -33,7 +36,9 @@ chat_id = '1234'
 
 agency = Agency([ceo, designer, web_developer,
                  [ceo, designer],
+                 [designer, ceo],
                  [designer, web_developer],
+                 [web_developer, designer],
                  [designer, copywriter]],
                 shared_instructions='./agency_manifesto.md',
                 threads_callbacks={
@@ -42,7 +47,4 @@ agency = Agency([ceo, designer, web_developer,
                 })
 
 if __name__ == '__main__':
-    agency.shared_state.set('app_directory', '/Users/vrsen/Projects/agency-swarm-lab/WebDevCrafters/vrsen-ai-landing-page')
     agency.demo_gradio(height=400)
-    # agency.run_demo()
-    # agency.get_completion('Please create a basic website for me', recipient_agent=web_developer, verbose=True)

@@ -21,6 +21,9 @@ class ImageGenerator(BaseTool):
     section: str = Field(
         ..., description="The section of the website that the image is for.", example="Homepage"
     )
+    image_name: str = Field(
+        ..., description="Name for the image, without extension."
+    )
     dimensions: Literal["1024x1024", "1792x1024", "1024x1792"] = Field(
         "1024x1024", description="The dimensions of the image to be generated.", example="1024x1024"
     )
@@ -48,7 +51,7 @@ class ImageGenerator(BaseTool):
             os.makedirs(self._shared_state.get("assets_dir", "./assets"))
             self._shared_state.set("assets_dir", os.path.abspath("./assets"))
     
-        with open(os.path.join(self._shared_state.get("assets_dir", "./assets"), f"{self.section}.png"), "wb") as f:
+        with open(os.path.join(self._shared_state.get("assets_dir", "./assets"), f"{self.image_name}.png"), "wb") as f:
             f.write(base64.b64decode(image_data))
             f.close()
 

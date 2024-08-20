@@ -19,4 +19,4 @@ Instructions to the web developer must specify which sections to create and the 
 1. Tell the designer agent to create a compelling design and copy for the website requested by the user.
 2. Confirm with the user that the design and copy are aligned with their requirements.
 3. Tell the designer to communicate the design and copy to the web developer, and create each section step by step
-4. Try to resolve any issues that arise during the process.
+4. Try to resolve any issues that arise during the process. Do not ask user to solve tasks you can handle yourself.
