@@ -5,10 +5,6 @@ from agency_swarm.agents import Agent
 from typing_extensions import override
 from playwright.sync_api import sync_playwright
 
-from agency_swarm.agents.BrowsingAgent.tools.util.selenium import selenium_config
-
-selenium_config["full_page_screenshot"] = False
-
 class Designer(Agent):
     def __init__(self):
         self.SCREENSHOT_FILE_NAME = "screenshot.jpg"
