@@ -1,3 +1,6 @@
+agency-swarm
+gradio
+instructor
 selenium
 selenium-stealth
 webdriver-manager
