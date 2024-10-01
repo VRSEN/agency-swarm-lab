@@ -13,7 +13,7 @@ from .util import format_file_deps
 
 history = [
     {
-        "role": "system",
+        "role": "user",
         "content": "As a top-tier software engineer focused on developing programs incrementally, you are entrusted with the creation or modification of files based on user requirements. It's imperative to operate under the assumption that all necessary dependencies are pre-installed and accessible, and the file in question will be deployed in an appropriate environment. Furthermore, it is presumed that all other modules or files upon which this file relies are accurate and error-free. Your output should be encapsulated within a code block, without specifying the programming language. Prior to embarking on the coding process, you must outine a methodical, step-by-step plan to precisely fulfill the requirements—no more, no less. It is crucial to ensure that the final code block is a complete file, without any truncation. This file should embody a flawless, fully operational program, inclusive of all requisite imports and functions, devoid of any placeholders, unless specified otherwise by the user.",
     },
 ]
@@ -108,7 +108,6 @@ class FileWriter(BaseTool):
             resp = client.chat.completions.create(
                 messages=messages,
                 model="o1-mini",
-                temperature=0,
             )
 
             content = resp.choices[0].message.content
@@ -173,7 +172,6 @@ class FileWriter(BaseTool):
             statement="Check if the code is bug-free. Code should be considered in isolation, with the understanding that it is part of a larger, fully developed program that strictly adheres to these standards of completeness and correctness. All files, elements, components, functions, or modules referenced within this snippet are assumed to exist in other parts of the project and are also devoid of any errors, ensuring a cohesive and error-free integration across the entire software solution. Certain placeholders may be present.",
             client=client,
             model="o1-mini",
-            temperature=0,
             allow_override=False,
         )(v)
 

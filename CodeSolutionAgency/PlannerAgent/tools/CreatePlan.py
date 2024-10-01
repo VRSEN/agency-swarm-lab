@@ -55,10 +55,9 @@ class CreatePlan(BaseTool):
 
         execution_plan = client.chat.completions.create(
             model="o1-mini",
-            temperature=0,
             messages=[
                 {
-                    "role": "system",
+                    "role": "user",
                     "content": (
                         """As a seasoned software engineering manager, you are tasked with devising an execution strategy for a coding project requested by the user. Your resources include a Browsing Agent capable of conducting research, such as locating API documentation, and a Coding Agent (Devid) skilled in writing and executing code. Construct a concise, step-by-step plan for accomplishing the task with the following guidelines:
 

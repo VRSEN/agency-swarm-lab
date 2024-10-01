@@ -41,16 +41,11 @@ def format_file_deps(v):
         resp = client.chat.completions.create(
             messages=[
                 {
-                    "role": "system",
-                    "content": "You are a world-class dependency resolver. You must extract the dependencies from the file provided.",
-                },
-                {
                     "role": "user",
-                    "content": f"Extract the dependencies from the file '{file}'.\n\n{content}",
+                    "content": f"As a world-class dependency resolver, extract the dependencies from the file '{file}'.\n\n{content}",
                 },
             ],
             model="o1-mini",
-            temperature=0,
             response_model=Dependencies,
         )
 
