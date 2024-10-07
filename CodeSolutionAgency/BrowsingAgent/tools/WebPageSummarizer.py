@@ -21,15 +21,23 @@ class WebPageSummarizer(BaseTool):
         content = " ".join(content.split()[:3000])
 
         completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "Your task is to summarize the content of the provided webpage. The summary should be concise and informative, capturing the main points and takeaways of the page."},
-                {"role": "user", "content": "Summarize the content of the following webpage:\n\n" + content},
+                {
+                    "role": "system",
+                    "content": "Your task is to summarize the content of the provided webpage. The summary should be concise and informative, capturing the main points and takeaways of the page.",
+                },
+                {
+                    "role": "user",
+                    "content": "Summarize the content of the following webpage:\n\n"
+                    + content,
+                },
             ],
             temperature=0.0,
         )
 
         return completion.choices[0].message.content
+
 
 if __name__ == "__main__":
     wd = get_web_driver()
